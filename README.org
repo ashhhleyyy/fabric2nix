@@ -4,6 +4,8 @@
 
 This is a fork of [[https://github.com/tadfisher/gradle2nix/tree/v2][gradle2nix v2]], adding support for building FabricMC mods.
 
+/Original README below, with URLs changed to this repo as appropriate./
+
 [[./assets/gradle2nix.png]]
 
 Generate [[https://nixos.org/nix/][Nix]] expressions which build
@@ -81,7 +83,7 @@ itself) is provided for convenience. The following expression will
 fetch and build the latest version of this package:
 
 #+begin_src nix
-import (fetchTarball "https://github.com/tadfisher/gradle2nix/archive/master.tar.gz")  {}
+import (fetchTarball "https://github.com/ashhhleyyy/fabric2nix/archive/master.tar.gz")  {}
 #+end_src
 
 If this expression is in, say, =gradle2nix.nix=, =gradle2nix= can be
@@ -96,10 +98,10 @@ You can also use the following one-liners to build or install
 
 #+begin_example
 # Build and place in ./result/
-nix build -f "https://github.com/tadfisher/gradle2nix/archive/master.tar.gz"
+nix build -f "https://github.com/ashhhleyyy/fabric2nix/archive/master.tar.gz"
 
 # Build and install in the user profile
-nix-env -if "https://github.com/tadfisher/gradle2nix/archive/master.tar.gz"
+nix-env -if "https://github.com/ashhhleyyy/fabric2nix/archive/master.tar.gz"
 #+end_example
 
 =gradle2nix= is not yet packaged in =nixpkgs= itself, but work is
@@ -113,7 +115,7 @@ attribute.
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  gradle2nix = import (fetchTarball "https://github.com/tadfisher/gradle2nix/archive/master.tar.gz")  {}
+  gradle2nix = import (fetchTarball "https://github.com/ashhhleyyy/fabric2nix/archive/master.tar.gz")  {}
 in
 gradle2nix.buildGradlePackage {
   pname = "my-package";
@@ -132,7 +134,7 @@ following will build and run =gradle2nix= with the arguments
 provided after =--=:
 
 #+begin_example
-nix run github:tadfisher/gradle2nix -- --help
+nix run github:ashhhleyyy/fabric2nix -- --help
 #+end_example
 
 The [[./nix/build-gradle-package.nix][buildGradlePackage]] function
@@ -140,7 +142,7 @@ is provided via the =builders= output.
 
 #+begin_src nix
 {
-  inputs.gradle2nix.url = "github:tadfisher/gradle2nix";
+  inputs.gradle2nix.url = "github:ashhhleyyy/fabric2nix";
 
   outputs = { self, gradle2nix }: {
 
@@ -414,7 +416,7 @@ replace it.
 
 Bug reports and feature requests are encouraged.
 
-[[https://github.com/tadfisher/gradle2nix/issues/new][Create an
+[[https://github.com/ashhhleyyy/fabric2nix/issues/new][Create an
 issue]]
 
 Code contributions are also encouraged. Please review the test cases
@@ -425,4 +427,4 @@ tests]] for examples of testing with these fixtures.
 
 ** License
 
-=gradle2nix= is licensed under the [[./COPYING][Apache License 2.0]].
+=fabric2nix= is based on =gradle2nix=, which is licensed under the [[./COPYING][Apache License 2.0]].
