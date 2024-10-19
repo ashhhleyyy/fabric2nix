@@ -5,12 +5,14 @@ import org.gradle.api.internal.artifacts.ivyservice.modulecache.FileStoreAndInde
 import org.gradle.internal.hash.ChecksumService
 import org.gradle.tooling.provider.model.ToolingModelBuilder
 import org.nixos.gradle2nix.model.DependencySet
+import org.nixos.gradle2nix.model.MinecraftVersion
 
 class DependencySetModelBuilder(
     private val dependencyExtractor: DependencyExtractor,
     private val cacheAccess: GradleCacheAccess,
     private val checksumService: ChecksumService,
     private val fileStoreAndIndexProvider: FileStoreAndIndexProvider,
+    private val minecraftVersions: List<MinecraftVersion>,
 ) : ToolingModelBuilder {
     override fun canBuild(modelName: String): Boolean = modelName == DependencySet::class.qualifiedName
 
@@ -22,5 +24,6 @@ class DependencySetModelBuilder(
             cacheAccess,
             checksumService,
             fileStoreAndIndexProvider,
+            minecraftVersions,
         )
 }

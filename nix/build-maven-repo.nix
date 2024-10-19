@@ -169,7 +169,7 @@ let
   modulePaths =
     let
       dependencies = fromJSON (readFile lockFile);
-      modules = mapAttrs mkModule dependencies;
+      modules = mapAttrs mkModule dependencies.mavenDependencies;
     in
     filter lib.isDerivation (attrValues modules);
 

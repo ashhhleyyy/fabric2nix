@@ -8,8 +8,8 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 fun processDependencies(
     config: Config,
     dependencySets: Iterable<DependencySet>,
-): Env =
-    buildMap<DependencyCoordinates, Map<String, Artifact>> {
+): Env {
+    val mavenDependencies = buildMap<DependencyCoordinates, Map<String, Artifact>> {
         for (dependencySet in dependencySets) {
             val env = dependencySet.toEnv()
 
@@ -40,6 +40,15 @@ fun processDependencies(
         artifacts.toSortedMap()
     }.toSortedMap(coordinatesComparator)
         .mapKeys { (coordinates, _) -> coordinates.id }
+
+    val minecraftVersions = buildSet {
+        for (dependencySet in dependencySets) {
+            addAll(dependencySet.minecraftVersions.map { MinecraftArtifact(it.gameVersion) })
+        }
+    }.toList()
+
+    return Env(mavenDependencies, minecraftVersions)
+}
 
 private fun DependencySet.toEnv(): Map<DependencyCoordinates, Map<String, Artifact>> =
     dependencies.associate { dep ->

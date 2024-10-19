@@ -20,6 +20,7 @@ import org.gradle.internal.resource.ExternalResourceReadBuildOperationType
 import org.gradle.internal.resource.ExternalResourceReadMetadataBuildOperationType
 import org.nixos.gradle2nix.model.DependencyCoordinates
 import org.nixos.gradle2nix.model.DependencySet
+import org.nixos.gradle2nix.model.MinecraftVersion
 import org.nixos.gradle2nix.model.impl.DefaultDependencyCoordinates
 import org.nixos.gradle2nix.model.impl.DefaultDependencySet
 import org.nixos.gradle2nix.model.impl.DefaultResolvedArtifact
@@ -62,6 +63,7 @@ class DependencyExtractor : BuildOperationListener {
         cacheAccess: GradleCacheAccess,
         checksumService: ChecksumService,
         fileStoreAndIndexProvider: FileStoreAndIndexProvider,
+        minecraftVersions: List<MinecraftVersion>,
     ): DependencySet {
         val files = mutableMapOf<DependencyCoordinates, MutableMap<File, String>>()
         val mappings = mutableMapOf<DependencyCoordinates, Map<String, String>>()
@@ -106,6 +108,7 @@ class DependencyExtractor : BuildOperationListener {
                         )
                     }
                 },
+            minecraftVersions = minecraftVersions,
         )
     }
 }

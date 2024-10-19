@@ -7,6 +7,10 @@ static boolean versionAtLeast(String version) {
 static void configureRepos(RepositoryHandler repositories) {
     repositories.configureEach { ArtifactRepository repo ->
         if (repo instanceof MavenArtifactRepository) {
+            // Don't override loom-injected repositories
+            if (repo.url.getScheme() == "file") {
+                return;
+            }
             repo.setArtifactUrls(new HashSet<URI>())
             repo.url 'file:@mavenRepo@'
             repo.metadataSources {

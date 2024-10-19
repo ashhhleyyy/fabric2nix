@@ -4,4 +4,5 @@ import java.io.Serializable
 
 interface DependencySet : Serializable {
     val dependencies: List<ResolvedDependency>
+    val minecraftVersions: List<MinecraftVersion>
 }

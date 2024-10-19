@@ -4,6 +4,13 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-fabric = {
+      url = "github:ashhhleyyy/nix-fabric";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs =
@@ -11,18 +18,22 @@
       self,
       flake-utils,
       nixpkgs,
+      nix-fabric,
       ...
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        scope = pkgs.callPackage ./nix { };
+        minecraft-jars = nix-fabric.packages.${system}.minecraft-jars;
+        scope = pkgs.callPackage ./nix {
+          inherit minecraft-jars;
+        };
         inherit (nixpkgs) lib;
       in
       {
         builders = {
-          inherit (scope) buildGradlePackage buildMavenRepo;
+          inherit (scope) buildGradlePackage buildMavenRepo buildLoomCaches;
           default = self.packages.${system}.buildGradlePackage;
         };
 

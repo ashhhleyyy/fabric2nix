@@ -2,6 +2,7 @@
   lib,
   stdenv,
   buildMavenRepo,
+  buildLoomCaches,
   gradleSetupHook,
   writeText,
 }:
@@ -84,6 +85,8 @@ let
   offlineRepo =
     if lockFile != null then buildMavenRepo { inherit lockFile fetchers overrides; } else null;
 
+  loomDependencies = if lockFile != null then buildLoomCaches { inherit lockFile; } else null;
+
   buildGradlePackage = stdenv.mkDerivation (
     finalAttrs:
     {
@@ -98,6 +101,8 @@ let
           gradleSetupHook.override { inherit (finalAttrs) gradle; }
         else
           gradleSetupHook;
+
+      inherit loomDependencies;
 
       nativeBuildInputs = (args.nativeBuildInputs or [ ]) ++ [ finalAttrs.gradleSetupHook ];
 

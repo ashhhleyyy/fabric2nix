@@ -1,5 +1,9 @@
 #+STARTUP: inlineimages
 
+** What is this?
+
+This is a fork of [[https://github.com/tadfisher/gradle2nix/tree/v2][gradle2nix v2]], adding support for building FabricMC mods.
+
 [[./assets/gradle2nix.png]]
 
 Generate [[https://nixos.org/nix/][Nix]] expressions which build

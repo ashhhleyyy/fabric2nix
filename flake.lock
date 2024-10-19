@@ -18,6 +18,29 @@
         "type": "github"
       }
     },
+    "nix-fabric": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729359930,
+        "narHash": "sha256-yIxrWUbkOcZ1sztn+xFkRbmsiAOAHCTu/jPMQON9kjE=",
+        "owner": "ashhhleyyy",
+        "repo": "nix-fabric",
+        "rev": "856453c27bc23691784cab3332f1fdeac6eef895",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ashhhleyyy",
+        "repo": "nix-fabric",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1720957393,
@@ -37,6 +60,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "nix-fabric": "nix-fabric",
         "nixpkgs": "nixpkgs"
       }
     },

@@ -29,6 +29,16 @@ gradleConfigurePhase() {
         ln -s "$gradleInitScript" "$GRADLE_USER_HOME/init.d"
     fi
 
+    if [ -n "$loomDependencies" ]; then
+        if [ ! -d "$loomDependencies" ]; then
+            echo "loomDependencies is not a directory path: $loomDependencies"
+            exit 1
+        fi
+        mkdir -p "$GRADLE_USER_HOME/caches"
+        cp -rs "$loomDependencies" "$GRADLE_USER_HOME/caches/fabric-loom"
+        chmod -R a+w "$GRADLE_USER_HOME/caches/fabric-loom"
+    fi
+
     runHook postConfigure
 }
 
