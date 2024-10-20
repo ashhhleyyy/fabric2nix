@@ -1,7 +1,7 @@
-{ makeSetupHook, gradle }:
+{ makeSetupHook, gradle-unwrapped }:
 
 makeSetupHook {
   name = "gradle-setup-hook";
-  propagatedBuildInputs = [ gradle ];
-  passthru.gradle = gradle;
+  propagatedBuildInputs = [ gradle-unwrapped ];
+  passthru.gradle = gradle-unwrapped;
 } ./setup-hook.sh
