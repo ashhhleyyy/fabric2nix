@@ -44,3 +44,12 @@ beforeProject { project ->
     configureRepos(project.buildscript.repositories)
     configureRepos(project.repositories)
 }
+
+gradle.projectsLoaded {
+  rootProject.allprojects {
+    tasks.withType(AbstractArchiveTask) {
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
+    }
+  }
+}
