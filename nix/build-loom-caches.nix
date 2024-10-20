@@ -84,6 +84,7 @@ let
         ln -s $clientJar $out/$name/minecraft-client.jar
         ln -s $serverJar $out/$name/minecraft-server.jar
         ln -s $minecraftInfo $out/$name/minecraft-info.json
+        ln -s $minecraftInfo $out/$name/mojang_minecraft_info.json
         ln -s $intermediary $out/$name/intermediary-v2.tiny
         '';
       };
